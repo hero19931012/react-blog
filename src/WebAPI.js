@@ -17,12 +17,11 @@ export function register({ username, nickname, password }) {
     .then(res => res.json());
 }
 
-export function getPosts() {
-  // 一次只拿 5 筆
-  // _start=0&_end=5 => 會取到結果中 index=5-8 的 post
-  // 但是為了拿到全部 post 的數量，所以採用發一次 API，之後控制顯示的 5 筆
-  return fetch(`${BASE_URL}/posts?_sort=createdAt&_order=desc`)
-    .then(res => res.json());
+export function getPosts(offset) {
+  return fetch(`${BASE_URL}/posts?_sort=createdAt&_order=desc&_start=${offset}&_end=${offset + 5}`)
+    // 由於不是直接 return res.json() 的話就不會自動 json.parse()
+    // 所以到後面再 parse
+    .then(res => res);
 }
 
 export function getPost(id) {
