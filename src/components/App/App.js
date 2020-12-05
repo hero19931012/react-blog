@@ -29,13 +29,15 @@ function App() {
   const [isGettingUser, setIsGettingUser] = useState(true);
 
   useEffect(() => {
-    if (getAuthToken) {
+    if (getAuthToken()) {
       getMe().then((response) => {
         if (response.ok) {
           setUser(response.data);
           setIsGettingUser(false);
         }
       });
+    } else {
+      setIsGettingUser(false);
     }
   }, []);
 

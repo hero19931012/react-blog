@@ -46,13 +46,16 @@ export function login(username, password) {
 
 export function getMe() {
   const token = getAuthToken();
-  return fetch(`${BASE_URL}/me`, {
-    headers: {
-      // get token from localStorage
-      authorization: `Bearer ${token}`,
-    },
-  })
-    .then(res => res.json());
+  if (token) {
+    return fetch(`${BASE_URL}/me`, {
+      headers: {
+        // get token from localStorage
+        authorization: `Bearer ${token}`,
+      },
+    })
+      .then(res => res.json())
+      .catch(err => { console.log(err) })
+  }
 }
 
 export function addPost(title, body) {
