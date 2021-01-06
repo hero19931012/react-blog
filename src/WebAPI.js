@@ -1,6 +1,6 @@
 import { getAuthToken } from './utils';
 
-const BASE_URL = 'https://student-json-api.lidemy.me';
+const BASE_URL = 'https://agile-everglades-72905.herokuapp.com';
 
 export function register({ username, nickname, password }) {
   return fetch(`${BASE_URL}/register`, {

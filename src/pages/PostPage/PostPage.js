@@ -44,7 +44,7 @@ const PostTime = styled(PostAuthor)``
 const PostContent = styled.div`
   padding: 20px 0;
   color: #555;
-  word-break: break-word;
+  white-space: pre-wrap;
 `
 
 function PostPage() {
