@@ -17,7 +17,7 @@ const Root = styled.div``
 const PostContainer = styled.div`
   margin: 0 auto;
   padding: 16px;
-  width: 600px;
+  width: 800px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
