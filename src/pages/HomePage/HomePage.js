@@ -55,10 +55,6 @@ const PageController = styled.div`
   border: solid 1px #555;
 `
 
-const PageControllerFirst = styled(PageController)``
-const PageControllerPrevious = styled(PageController)``
-const PageControllerNext = styled(PageController)``
-const PageControllerLast = styled(PageController)``
 const CurrentPage = styled(PageController)`
   border: none;
 `
@@ -96,60 +92,61 @@ function HomePage() {
   const [offset, setOffset] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
   const [isGettingPosts, setIsGettingPosts] = useState(true)
-
-  const totalPageCount = Math.ceil(posts.length / 5)
+  const [totalPageCount, setTotalPageCount] = useState(0)
 
   useEffect(() => {
-    getPosts().then((posts) => {
-      setPosts(posts)
-      setIsGettingPosts(false)
+    getPosts(offset).then((res) => {
+      setTotalPageCount(Math.ceil(res.headers.get('X-Total-Count') / 5));
+      return res.json()
+    }).then((posts) => {
+      setPosts(posts);
+      setIsGettingPosts(false);
     })
-  }, [])
+  }, [offset])
 
   return (
     <Root>
       {isGettingPosts && <Loading>Loading...</Loading>}
       { !isGettingPosts
         && posts
-          .filter((post, index) => index >= offset && index < (offset + 5))
           .map(post => <Post post={post} key={post.id} />)
       }
       {!isGettingPosts
         && (
         <PageControllerContainer>
-          <PageControllerFirst onClick={() => {
+          <PageController onClick={() => {
             setOffset(0)
             setCurrentPage(1)
           }}
           >
             {"<<"}
-          </PageControllerFirst>
-          <PageControllerPrevious onClick={() => {
+          </PageController>
+          <PageController onClick={() => {
             if (currentPage <= 1) return
             setOffset(offset - 5)
             setCurrentPage(currentPage - 1)
           }}
           >
             {"<"}
-          </PageControllerPrevious>
+          </PageController>
 
           <CurrentPage>{`${currentPage} / ${totalPageCount}`}</CurrentPage>
 
-          <PageControllerNext onClick={() => {
+          <PageController onClick={() => {
             if (currentPage >= totalPageCount) return
             setOffset(offset + 5)
             setCurrentPage(currentPage + 1)
           }}
           >
             {">"}
-          </PageControllerNext>
-          <PageControllerLast onClick={() => {
+          </PageController>
+          <PageController onClick={() => {
             setOffset((totalPageCount - 1) * 5)
             setCurrentPage(totalPageCount)
           }}
           >
             {">>"}
-          </PageControllerLast>
+          </PageController>
         </PageControllerContainer>
         )
       }
