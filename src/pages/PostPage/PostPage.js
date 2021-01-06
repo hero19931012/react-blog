@@ -8,11 +8,15 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useParams } from "react-router-dom";
-import { getPost } from '../../WebAPI'
+import { getPost } from '../../WebAPI';
+import ReactMarkdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { cb } from 'react-syntax-highlighter/dist/esm/styles/prism'
+
 
 const Root = styled.div``
 const PostContainer = styled.div`
-  width: 600px;
+  width: 800px;
   margin: 20px auto 0 auto;
   padding: 20px;
   box-shadow: 0px 2px 10px 2px rgba(0, 0, 0, 0.1);
@@ -47,6 +51,19 @@ const PostContent = styled.div`
   white-space: pre-wrap;
 `
 
+const Img = styled.img`
+  width: 100%;
+`
+
+const renderers = {
+  code: ({ language, value }) => {
+    return <SyntaxHighlighter style={cb} language={"javascript"} children={value} />
+  },
+  image: ({alt, src, title}) => {
+    return <Img src={src}/>
+  }
+}
+
 function PostPage() {
   const [post, setPost] = useState({})
   const [author, setAuthor] = useState(null)
@@ -69,7 +86,9 @@ function PostPage() {
             <PostTime>{post.createdAt && new Date(post.createdAt).toLocaleString()}</PostTime>
           </PostInfoContainer>
         </PostHeader>
-        <PostContent>{post.body}</PostContent>
+        <PostContent>
+          <ReactMarkdown source={post.body} renderers={renderers} />
+        </PostContent>
       </PostContainer>
     </Root>
   );
