@@ -1,12 +1,3 @@
-/* eslint-disable no-shadow */
-/* eslint-disable react/forbid-prop-types */
-/* eslint-disable react/require-default-props */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable react/jsx-filename-extension */
-/* eslint-disable quotes */
-/* eslint-disable semi */
-/* eslint-disable import/no-unresolved */
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types';
@@ -78,7 +69,6 @@ function Post({ post }) {
     <PostContainer>
       <PostTitle to={`/posts/${post.id}`}>{post.title}</PostTitle>
       <PostDate>{new Date(post.createdAt).toLocaleString()}</PostDate>
-      {/* <PostContent>{post.content}</PostContent> */}
     </PostContainer>
   )
 }

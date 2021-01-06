@@ -1,9 +1,3 @@
-/* eslint-disable consistent-return */
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable react/jsx-filename-extension */
-/* eslint-disable quotes */
-/* eslint-disable semi */
-/* eslint-disable import/no-unresolved */
 import { useState, useContext } from 'react'
 import styled from 'styled-components'
 import { useHistory } from "react-router-dom";
@@ -39,11 +33,8 @@ const SubmitButton = styled.button`
 function LoginPage() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-
-  // show error message
   const [errorMessage, setErrorMessage] = useState('')
 
-  // useHistory
   const history = useHistory()
 
   const { setUser } = useContext(AuthContext)
@@ -60,23 +51,13 @@ function LoginPage() {
         // login success
         setErrorMessage(null)
         const { token } = data;
-        // 把 token 寫入 localStorage
-        // 也可以另開 utils.js => setAuthToken, 再引入
-        // localStorage.setItem('token', token)
         setAuthToken(token);
-
-        // 4. 存取 getMe API, 取得 user data => setUser(data)
         getMe().then((response) => {
-          console.log(response);
           if (response.ok !== 1) {
-            // login fail => set token to null, show errorMessage
             setAuthToken(null);
             return setErrorMessage(response.toString());
           }
-
           setUser(response.data)
-
-          // redirect to home page
           history.push('/')
         })
       })

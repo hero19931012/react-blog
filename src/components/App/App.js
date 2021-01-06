@@ -1,6 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable react/jsx-filename-extension */
-/* eslint-disable import/no-unresolved */
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
@@ -48,7 +45,6 @@ function App() {
         <Router>
           <Header />
           <Switch>
-            {/* 加上 exact 表示完全匹配 */}
             <Route exact path="/">
               <HomePage />
             </Route>

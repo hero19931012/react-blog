@@ -1,8 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable react/jsx-filename-extension */
-/* eslint-disable quotes */
-/* eslint-disable semi */
-/* eslint-disable import/no-unresolved */
 import styled from 'styled-components';
 
 const Root = styled.div``

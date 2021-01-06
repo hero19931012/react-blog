@@ -1,8 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable react/jsx-filename-extension */
-/* eslint-disable quotes */
-/* eslint-disable semi */
-/* eslint-disable import/no-unresolved */
 import { useContext } from 'react'
 import styled from 'styled-components'
 import { Link, useLocation, useHistory } from "react-router-dom";
@@ -24,14 +19,10 @@ const HeaderContainer = styled.div`
 
   color: #555;
   background-color: white;
-
-  /* color: white; */
-  /* background-color: #000035;  */
   line-height: 64px;
 
   & * {
     color: #555;
-    /* border: solid 1px rgba(0, 0, 0, 0.3) */
   }
 `
 
@@ -52,29 +43,18 @@ const Nav = styled(Link)`
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-
-  /* &:hover {
-    background-color: #9999aa
-  } */
-
   ${props => props.$active && `background: rgba(0, 0, 0, 0.1)`}
 `
 
 function Header() {
   const location = useLocation()
   const { pathname } = location
-
-  // get user
   const { user, setUser, isGettingUser } = useContext(AuthContext)
   const history = useHistory();
 
-  // 8. handleLogout => 1. token 設為 '', 2. 透過 useHistory 導回首頁
   function handleLogout() {
     setAuthToken('');
-    // 9. 由於登入會導回首頁，造成不能 push 首頁, 但不影響功能
     history.push('/');
-
-    // 10. user => null
     setUser(null);
   }
 

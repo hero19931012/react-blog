@@ -1,9 +1,3 @@
-/* eslint-disable consistent-return */
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable react/jsx-filename-extension */
-/* eslint-disable quotes */
-/* eslint-disable semi */
-/* eslint-disable import/no-unresolved */
 import { useState } from 'react'
 import styled from 'styled-components'
 
@@ -73,9 +67,7 @@ function NewPostPage() {
 
   function handleNewPostSubmit(e) {
     e.preventDefault();
-    console.log(title, content);
     addPost(title, content).then((response) => {
-      console.log(response)
       if (response.ok === 0) {
         return setErrorMessage(response.message)
       }

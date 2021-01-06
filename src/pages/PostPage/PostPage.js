@@ -1,10 +1,3 @@
-/* eslint-disable no-shadow */
-/* eslint-disable consistent-return */
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable react/jsx-filename-extension */
-/* eslint-disable quotes */
-/* eslint-disable semi */
-/* eslint-disable import/no-unresolved */
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useParams } from "react-router-dom";
